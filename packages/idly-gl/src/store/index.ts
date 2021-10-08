@@ -53,6 +53,7 @@ export interface Store {
     zoom: number;
   };
   entityTree?: EntityExpanded;
+  tileUrl?: string;
 }
 
 export interface EntityExpanded {

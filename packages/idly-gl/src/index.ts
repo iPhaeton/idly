@@ -138,7 +138,8 @@ export class IdlyGlPlugin {
       this.store.pipe(rxMap(({ map }) => map), distinctUntilChanged()),
       this.destroy,
       actions,
-      m
+      m,
+      this.config.tileUrl,
     );
 
     selectEntityStream(

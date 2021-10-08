@@ -72,13 +72,14 @@ const cache: any = new Map();
 export async function fetchTileXml(
   x: number,
   y: number,
-  zoom: number
+  zoom: number,
+  tileUrl: string = 'https://www.openstreetmap.org/api/0.6/map',
 ): Promise<any> {
   const bboxStr = mercator.bbox(x, y, zoom).join(',');
   if (cache.has(bboxStr)) {
     return cache.get(bboxStr);
   }
-  return fetch(`https://www.openstreetmap.org/api/0.6/map?bbox=${bboxStr}`)
+  return fetch(`${tileUrl}?bbox=${bboxStr}`)
     .then(r => (r.ok ? r.text() : Promise.reject(r.statusText)))
     .then(text => parser(text))
     .then(entities => {

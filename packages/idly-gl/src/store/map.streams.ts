@@ -19,7 +19,8 @@ export function mapStreams(
   map: Observable<Store['map']>,
   destroy: Subject<void>,
   actions: Actions,
-  gl: any
+  gl: any,
+  tileUrl?: string,
 ) {
   // useful for updating the FC whenever quadkeys change
   // the reason its not derived property is because
@@ -33,7 +34,7 @@ export function mapStreams(
     .pipe(
       rxMap(({ quadkeys }) => quadkeys),
       distinctUntilChanged(),
-      switchMap(quadkeys => fromPromise(entities(quadkeys))),
+      switchMap(quadkeys => fromPromise(entities(quadkeys, tileUrl))),
       switchMap(e => fromPromise(workerOperations.getQuadkey(e)))
     )
     .subscribe(r => actions.modifyFC(r), e => console.error(e));
