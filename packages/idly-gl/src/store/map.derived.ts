@@ -5,7 +5,12 @@ import { Store, TileUrlConfig } from './index';
 
 export type MapStore = Store['map'];
 
-export const entities = (tileUrlConfig?: TileUrlConfig) => weakCache((quadkeys: MapStore['quadkeys']) => {
+interface EntitiesInterface {
+  quadkeys: MapStore['quadkeys'];
+  tileUrlConfig?: TileUrlConfig;
+}
+
+export const entities = weakCache(({quadkeys, tileUrlConfig}: EntitiesInterface) => {
   return Promise.all(
     quadkeys.map(quadkeyToTile).map((t, index) =>
       fetchTileXml(t.x, t.y, t.z, tileUrlConfig).then(r => ({

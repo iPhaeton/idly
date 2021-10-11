@@ -22,8 +22,6 @@ export function mapStreams(
   gl: any,
   tileUrlConfig?: TileUrlConfig,
 ) {
-  const entitiesFn = entities(tileUrlConfig);
-
   // useful for updating the FC whenever quadkeys change
   // the reason its not derived property is because
   // if a user modifies an entity, we might need to
@@ -36,7 +34,7 @@ export function mapStreams(
     .pipe(
       rxMap(({ quadkeys }) => quadkeys),
       distinctUntilChanged(),
-      switchMap(quadkeys => fromPromise(entitiesFn(quadkeys))),
+      switchMap(quadkeys => fromPromise(entities({quadkeys, tileUrlConfig}))),
       switchMap(e => fromPromise(workerOperations.getQuadkey(e)))
     )
     .subscribe(r => actions.modifyFC(r), e => console.error(e));
