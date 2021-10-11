@@ -19,6 +19,8 @@ function getStateController(
   }
 }
 
+declare const process: any;
+
 export function workerRelay(
   prevState?: WorkerState
 ): (message: any) => Promise<any> {

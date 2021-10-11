@@ -10,6 +10,8 @@
     "build",
     "scripts",
     "webpack",
-    "jest"
+    "jest",
+    "src/tests",
+    "src/dataStructures/table/table.test.ts",
   ]
 }

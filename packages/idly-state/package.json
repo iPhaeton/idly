@@ -20,9 +20,11 @@
   },
   "license": "MIT",
   "dependencies": {
+    "fs": "0.0.1-security",
     "idly-common": "^1.6.0",
     "idly-faster-osm-parser": "^1.6.0",
-    "monet": "^0.8.10"
+    "monet": "^0.8.10",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@types/jest": "^22.0.1",

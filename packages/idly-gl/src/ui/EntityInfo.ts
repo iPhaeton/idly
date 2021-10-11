@@ -35,7 +35,7 @@ export async function EntityInfo({
          <span>Type: ${entity.type}</span>
          <span>
            Changeset:
-           <a href=`https://osmcha.mapbox.com/changesets/${entity.attributes.changeset}` target="_blank">
+           <a href=\`https://osmcha.mapbox.com/changesets/${entity.attributes.changeset}\` target="_blank">
             ${entity.attributes.changeset}
            </a>
          </span>

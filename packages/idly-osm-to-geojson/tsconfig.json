@@ -10,7 +10,8 @@
       "build",
       "scripts",
       "webpack",
-      "jest"
+      "jest",
+      "src/tests/index.test.ts"
     ]
   }
   

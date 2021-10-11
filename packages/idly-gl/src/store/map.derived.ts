@@ -5,7 +5,7 @@ import { Store } from './index';
 
 export type MapStore = Store['map'];
 
-export const entities = weakCache((quadkeys: MapStore['quadkeys'], tileUrl?: string) => {
+export const entities = (tileUrl?: string) => weakCache((quadkeys: MapStore['quadkeys']) => {
   return Promise.all(
     quadkeys.map(quadkeyToTile).map((t, index) =>
       fetchTileXml(t.x, t.y, t.z, tileUrl).then(r => ({

@@ -1,7 +1,7 @@
 import { BBox } from '@turf/helpers';
 
 import { mercator } from '../geo/sphericalMercator';
-import { Tile } from '../geo/Tile';
+import { Tile } from './Tile';
 
 /**
  * @DESC gets all the xyz[] which the given longLat intersects with

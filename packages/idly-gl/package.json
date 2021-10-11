@@ -1,5 +1,5 @@
 {
-  "name": "idly-gl",
+  "name": "iphaeton-idly-gl",
   "version": "1.6.0",
   "description": "A mapbox-gl plugin to render Openstreetmap as a geojson layer.",
   "main": "dist/idly-gl.js",
