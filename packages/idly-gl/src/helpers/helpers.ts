@@ -11,6 +11,7 @@ import {
   PlaceHolderLayer3,
 } from '../constants';
 import { Layer } from '../layers/types';
+import { TileUrlConfig } from '../store';
 
 export function addSource(layer: any, source: string) {
   return {
@@ -73,13 +74,14 @@ export async function fetchTileXml(
   x: number,
   y: number,
   zoom: number,
-  tileUrl: string = 'https://www.openstreetmap.org/api/0.6/map',
+  // tileUrl: string = 'https://www.openstreetmap.org/api/0.6/map',
+  {url: tileUrl, options = {}}: TileUrlConfig = {url: 'https://www.openstreetmap.org/api/0.6/map'},
 ): Promise<any> {
   const bboxStr = mercator.bbox(x, y, zoom).join(',');
   if (cache.has(bboxStr)) {
     return cache.get(bboxStr);
   }
-  return fetch(`${tileUrl}?bbox=${bboxStr}`)
+  return fetch(`${tileUrl}?bbox=${bboxStr}`, options)
     .then(r => (r.ok ? r.text() : Promise.reject(r.statusText)))
     .then(text => parser(text))
     .then(entities => {

@@ -1,14 +1,14 @@
 import { weakCache } from 'idly-common/lib/misc';
 import { quadkeyToTile } from 'idly-common/lib/misc/quadkeyToTile';
 import { fetchTileXml } from '../helpers/helpers';
-import { Store } from './index';
+import { Store, TileUrlConfig } from './index';
 
 export type MapStore = Store['map'];
 
-export const entities = (tileUrl?: string) => weakCache((quadkeys: MapStore['quadkeys']) => {
+export const entities = (tileUrlConfig?: TileUrlConfig) => weakCache((quadkeys: MapStore['quadkeys']) => {
   return Promise.all(
     quadkeys.map(quadkeyToTile).map((t, index) =>
-      fetchTileXml(t.x, t.y, t.z, tileUrl).then(r => ({
+      fetchTileXml(t.x, t.y, t.z, tileUrlConfig).then(r => ({
         quadkey: quadkeys[index],
         entities: r,
       }))

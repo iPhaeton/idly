@@ -4,7 +4,7 @@ import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
 import { map as rxMap } from 'rxjs/operators/map';
 import { switchMap } from 'rxjs/operators/switchMap';
 import { Subject } from 'rxjs/Subject';
-import { MainTabs, Store } from '../store/index';
+import { MainTabs, Store, TileUrlConfig } from '../store/index';
 import { entities, visibleGlLayers } from '../store/map.derived';
 import {
   makeBoundsAndZoom$,
@@ -20,9 +20,9 @@ export function mapStreams(
   destroy: Subject<void>,
   actions: Actions,
   gl: any,
-  tileUrl?: string,
+  tileUrlConfig?: TileUrlConfig,
 ) {
-  const entitiesFn = entities(tileUrl);
+  const entitiesFn = entities(tileUrlConfig);
 
   // useful for updating the FC whenever quadkeys change
   // the reason its not derived property is because

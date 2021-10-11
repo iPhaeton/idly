@@ -139,7 +139,7 @@ export class IdlyGlPlugin {
       this.destroy,
       actions,
       m,
-      this.config.tileUrl,
+      this.config.tileUrlConfig,
     );
 
     selectEntityStream(

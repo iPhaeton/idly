@@ -3,6 +3,11 @@ import { GetQuadkey } from 'idly-worker/lib/operations/getQuadkey/type';
 import { LayerOpacity } from '../helpers/layerOpacity';
 import { Layer } from '../layers/types';
 
+export interface TileUrlConfig {
+  url: string;
+  options?: Record<string, any>;
+}
+
 export const enum MainTabs {
   Info = 'Info',
   Tags = 'Tags',
@@ -53,7 +58,7 @@ export interface Store {
     zoom: number;
   };
   entityTree?: EntityExpanded;
-  tileUrl?: string;
+  tileUrlConfig?: TileUrlConfig;
 }
 
 export interface EntityExpanded {
