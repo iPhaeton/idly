@@ -10,7 +10,7 @@ interface EntitiesInterface {
   tileUrlConfig?: TileUrlConfig;
 }
 
-export const entities = weakCache(({quadkeys, tileUrlConfig}: EntitiesInterface) => {
+export const entities = ({quadkeys, tileUrlConfig}: EntitiesInterface) => {
   return Promise.all(
     quadkeys.map(quadkeyToTile).map((t, index) =>
       fetchTileXml(t.x, t.y, t.z, tileUrlConfig).then(r => ({
@@ -19,7 +19,7 @@ export const entities = weakCache(({quadkeys, tileUrlConfig}: EntitiesInterface)
       }))
     )
   );
-});
+};
 
 export const visibleGlLayers: (
   l: MapStore['layers']
