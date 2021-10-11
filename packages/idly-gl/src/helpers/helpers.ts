@@ -78,14 +78,17 @@ export async function fetchTileXml(
   {url: tileUrl, options = {}}: TileUrlConfig = {url: 'https://www.openstreetmap.org/api/0.6/map'},
 ): Promise<any> {
   const bboxStr = mercator.bbox(x, y, zoom).join(',');
-  if (cache.has(bboxStr)) {
-    return cache.get(bboxStr);
+  const url = `${tileUrl}?bbox=${bboxStr}`;
+
+  if (cache.has(url)) {
+    return cache.get(url);
   }
-  return fetch(`${tileUrl}?bbox=${bboxStr}`, options)
+
+  return fetch(url, options)
     .then(r => (r.ok ? r.text() : Promise.reject(r.statusText)))
     .then(text => parser(text))
     .then(entities => {
-      cache.set(bboxStr, entities);
+      cache.set(url, entities);
       return entities;
     });
 }
