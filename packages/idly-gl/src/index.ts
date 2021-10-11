@@ -13,7 +13,7 @@ import { MainTabs, Store } from './store/index';
 import { mapStreams } from './store/map.streams';
 import { selectEntityStream } from './store/selectEntity.stream';
 import { pollGlReady } from './streams';
-import { workerOperations } from './worker';
+import { createWorkerOperations, workerOperations } from './worker';
 
 // prevents running one or more of this plugin
 let runningInstance: IdlyGlPlugin | undefined;
@@ -25,6 +25,7 @@ export class IdlyGlPlugin {
   private destroy: Subject<void> = new Subject<void>();
   private onChangeCb?: (store: Store) => void;
   constructor(config: Partial<Store> = {}) {
+    createWorkerOperations();
     this.config = config;
 
     const starter: Store = {
